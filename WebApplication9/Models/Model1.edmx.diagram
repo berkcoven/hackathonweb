@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5fe6a32e14464c3aa145e1e266b88d6b" Name="Diagram1">
+        <EntityTypeShape EntityType="HackathlonDBModel.Expens" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackathlonDBModel.Group" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackathlonDBModel.GroupPerson" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackathlonDBModel.Person" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="HackathlonDBModel.FK_Expenses_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="HackathlonDBModel.FK_Expenses_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="HackathlonDBModel.FK_Expenses_Person1" ManuallyRouted="false" />
+        <AssociationConnector Association="HackathlonDBModel.FK_GroupPerson_Group" />
+        <AssociationConnector Association="HackathlonDBModel.FK_GroupPerson_Person" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

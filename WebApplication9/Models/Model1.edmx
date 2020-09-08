@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HackathlonDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ExpensesId" />
+          </Key>
+          <Property Name="ExpensesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpensesValue" Type="float" Nullable="false" />
+          <Property Name="OdeyenId" Type="int" />
+          <Property Name="ExpenesesName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExpensesQuantity" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupPerson">
+          <Key>
+            <PropertyRef Name="GroupPersonId" />
+          </Key>
+          <Property Name="GroupPersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="GroupId" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="GunlukHarcama" Type="float" />
+        </EntityType>
+        <Association Name="FK_Expenses_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Person1">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="OdeyenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupPerson_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="GroupPerson" Type="Self.GroupPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupPerson">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupPerson_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="GroupPerson" Type="Self.GroupPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="GroupPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HackathlonDBModelStoreContainer">
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupPerson" EntityType="Self.GroupPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Expenses_Group" Association="Self.FK_Expenses_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Person" Association="Self.FK_Expenses_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Person1" Association="Self.FK_Expenses_Person1">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupPerson_Group" Association="Self.FK_GroupPerson_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="GroupPerson" EntitySet="GroupPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupPerson_Person" Association="Self.FK_GroupPerson_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="GroupPerson" EntitySet="GroupPerson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HackathlonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Expens">
+          <Key>
+            <PropertyRef Name="ExpensesId" />
+          </Key>
+          <Property Name="ExpensesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpensesValue" Type="Double" Nullable="false" />
+          <Property Name="OdeyenId" Type="Int32" />
+          <Property Name="ExpenesesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpensesQuantity" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Expenses_Group" FromRole="Expenses" ToRole="Group" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Expenses_Person" FromRole="Expenses" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="Self.FK_Expenses_Person1" FromRole="Expenses" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Expenses" Relationship="Self.FK_Expenses_Group" FromRole="Group" ToRole="Expenses" />
+          <NavigationProperty Name="GroupPersons" Relationship="HackathlonDBModel.FK_GroupPerson_Group" FromRole="Group" ToRole="GroupPerson" />
+        </EntityType>
+        <EntityType Name="GroupPerson">
+          <Key>
+            <PropertyRef Name="GroupPersonId" />
+          </Key>
+          <Property Name="GroupPersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="HackathlonDBModel.FK_GroupPerson_Group" FromRole="GroupPerson" ToRole="Group" />
+          <NavigationProperty Name="Person" Relationship="HackathlonDBModel.FK_GroupPerson_Person" FromRole="GroupPerson" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Expenses" Relationship="Self.FK_Expenses_Person" FromRole="Person" ToRole="Expenses" />
+          <NavigationProperty Name="Expenses1" Relationship="Self.FK_Expenses_Person1" FromRole="Person" ToRole="Expenses" />
+          <Property Name="GunlukHarcama" Type="Double" />
+          <NavigationProperty Name="GroupPersons" Relationship="HackathlonDBModel.FK_GroupPerson_Person" FromRole="Person" ToRole="GroupPerson" />
+        </EntityType>
+        <Association Name="FK_Expenses_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Person1">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="OdeyenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HackathlonDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Expenses" EntityType="Self.Expens" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="GroupPersons" EntityType="Self.GroupPerson" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <AssociationSet Name="FK_Expenses_Group" Association="Self.FK_Expenses_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Person" Association="Self.FK_Expenses_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Person1" Association="Self.FK_Expenses_Person1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupPerson_Group" Association="HackathlonDBModel.FK_GroupPerson_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="GroupPerson" EntitySet="GroupPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupPerson_Person" Association="HackathlonDBModel.FK_GroupPerson_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="GroupPerson" EntitySet="GroupPersons" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_GroupPerson_Group">
+          <End Type="HackathlonDBModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="HackathlonDBModel.GroupPerson" Role="GroupPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupPerson">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupPerson_Person">
+          <End Type="HackathlonDBModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="HackathlonDBModel.GroupPerson" Role="GroupPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="GroupPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HackathlonDBModelStoreContainer" CdmEntityContainer="HackathlonDBEntities">
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="HackathlonDBModel.Expens">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ExpensesId" ColumnName="ExpensesId" />
+                <ScalarProperty Name="ExpensesValue" ColumnName="ExpensesValue" />
+                <ScalarProperty Name="OdeyenId" ColumnName="OdeyenId" />
+                <ScalarProperty Name="ExpenesesName" ColumnName="ExpenesesName" />
+                <ScalarProperty Name="ExpensesQuantity" ColumnName="ExpensesQuantity" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="HackathlonDBModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupPersons">
+            <EntityTypeMapping TypeName="HackathlonDBModel.GroupPerson">
+              <MappingFragment StoreEntitySet="GroupPerson">
+                <ScalarProperty Name="GroupPersonId" ColumnName="GroupPersonId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="HackathlonDBModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="GunlukHarcama" ColumnName="GunlukHarcama" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
